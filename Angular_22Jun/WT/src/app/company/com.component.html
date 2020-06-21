@@ -1,0 +1,121 @@
+<app-navbar></app-navbar>
+
+
+<div class="topnav">
+  <div class="search-container">
+    <form (ngSubmit)="onCall()" #SearchForm="ngForm">
+      <input type="text" placeholder="Search.." name="serx" [(ngModel)]="serx" required>
+      <button type="submit" [disabled]="!SearchForm.form.valid"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+</div>
+
+
+
+<form (ngSubmit)="onSubmit()" #ExperienceForm="ngForm">
+
+  <h5 class="mb-3 text-uppercase bg-light p-3"><i class="mdi mdi-office-building mr-1"></i>Add Experience</h5>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="eposition">Position Name</label>
+        <input type="text" [(ngModel)]="experience.eposition" class="form-control" id="eposition" name="eposition"
+          placeholder="Enter Position Name" required #eposition="ngModel"
+          [class.is-invalid]="eposition.invalid && eposition.touched">
+        <small class="text-danger" [class.d-none]="eposition.valid || eposition.untouched">Position is a required
+          field</small>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="nationalid">Individual ID</label>
+        <input type="text" [(ngModel)]="experience.nationalid" class="form-control" id="nationalid" name="nationalid"
+          type="number" pattern="^(\d{10})$" placeholder="Enter Individual ID" required #nationalid="ngModel"
+          [class.is-invalid]="nationalid.invalid && nationalid.touched">
+        <div *ngIf="nationalid.errors &&(nationalid.invalid && nationalid.touched)">
+          <small class="text-danger" *ngIf="nationalid.errors.required">National Id is a required field</small>
+          <small class="text-danger" *ngIf="nationalid.errors.pattern">Enter a valid National Id</small>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="sdate">Start Date</label>
+        <input type="date" [(ngModel)]="experience.sdate" class="form-control" id="sdate" name="sdate"
+          placeholder="Enter start date" required #sdate="ngModel" [class.is-invalid]="sdate.invalid && sdate.touched">
+        <small class="text-danger" [class.d-none]="sdate.valid || sdate.untouched">Start date is a required
+          field</small>
+      </div>
+    </div>
+
+
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="edate">End Date</label>
+        <input type="date" [(ngModel)]="experience.edate" class="form-control" id="edate" name="edate"
+          placeholder="Enter end date" required #edate="ngModel" [class.is-invalid]="edate.invalid && edate.touched">
+        <small class="text-danger" [class.d-none]="edate.valid || edate.untouched">End date is a required field</small>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="companyname">Company Name</label>
+        <input type="text" [(ngModel)]="experience.companyname" class="form-control" id="companyname" name="companyname"
+          placeholder="Enter company name" required #companyname="ngModel"
+          [class.is-invalid]="companyname.invalid && companyname.touched">
+        <small class="text-danger" [class.d-none]="companyname.valid || companyname.untouched">Company name is a
+          required field</small>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="addby">Added By</label>
+        <input type="text" [(ngModel)]="experience.addby" class="form-control" id="addby" name="addby"
+          placeholder="Enter Add By" required #addby="ngModel" [class.is-invalid]="addby.invalid && addby.touched">
+        <small class="text-danger" [class.d-none]="addby.valid || addby.untouched">It is a required field</small>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="companyemail">Company Email</label>
+        <input type="text" [(ngModel)]="experience.companyemail" class="form-control" id="companyemail"
+          name="companyemail" placeholder="Enter company email" required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #companyemail="ngModel"
+          [class.is-invalid]="companyemail.invalid && companyemail.touched">
+
+        <div *ngIf="companyemail.errors &&(companyemail.invalid && companyemail.touched)">
+          <small class="text-danger" *ngIf="companyemail.errors.required">Email is a required field</small>
+          <small class="text-danger" *ngIf="companyemail.errors.pattern">Enter a valid email</small>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Upload </label>
+        <input class="form-control" type="file" (change)="onFileChanged($event)">
+        <input class="btn" style="float: right;" (click)="onUpload()" value="upload">
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!ExperienceForm.form.valid" class="btn">Add</button>
+</form>
